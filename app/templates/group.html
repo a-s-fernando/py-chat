@@ -1,0 +1,31 @@
+{% extends "task.html" %}
+{% block content %}
+<br>
+<center><h1> {{ title }} </h1></center>
+<br>
+<div class="container-md">
+{% for message in messages %} <!-- loops through all of the valid messages in the database, and presents them using bootstraps card styling -->
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title">{{ message.username }}</h5>
+  </div>
+  <div class="card-body">
+    <p class="card-text">{{ message.message }}</p>
+  </div>
+</div>
+<br>
+{% endfor %}
+</div>
+<h2> "Make a New Group:" </h2>
+<div class="container-md">
+<form action="" method="post" name="user">
+    {{ form.hidden_tag() }}
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Group Name</label>
+    <input name="name" type="text" class="form-control">
+           {% for error in form.name.errors %} <!-- any errors, notably the one for valid field being incomplete, will be shown underneath the relevant box -->
+      <span style="color: red;">[{{ error }}]</span>
+	{% endfor %}
+  </div>
+</form></div>
+{% endblock %}
