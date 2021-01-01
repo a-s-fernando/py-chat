@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% with messages = get_flashed_messages() %} <!-- lets the user know if creation was successful by flashing a short notification -->
+{% if messages %}
+  <ul>
+  {% for message in messages %}
+      <li>{{ message }} </li>
+  {% endfor %}
+  </ul>
+{% endif %}
+{% endwith %}
+<br>
+<center><h1> {{ title }} </h1></center>
+<br>
+{% if not join %}
+<div class="container-md">
+{% for item in list %} <!-- loops through all of the valid messages in the database, and presents them using bootstraps card styling -->
+<div class="card">
+  {% if group %}
+  <div class="card-header">
+    <h5 class="card-title"><a href="/groups/{{ item.groupid }}">{{ item.groupname }}</a></h5>
+  </div>
+  {% else %}
+  <div class="card-header">
+    <h5 class="card-title"><a href="/friends/{{ item.friendid }}">{{ item.username }}</a></h5>
+  </div>
+  {% endif %}
+</div>
+<br>
+{% endfor %}
+</div>
+{% endif %}
+{% if group %}
+  <center><h2><a href="groups/join">Click here for joining groups</a></h2></center>
+{% endif %}
+<center><h2> {{ purpose }} </h2></center>
+<div class="container-md">
+<form action="" method="post" name="user">
+    {{ form.hidden_tag() }}
+  <div class="form-group">
+    <label for="exampleFormControlInput1">{{ inputlabel }}</label>
+    <input name="user" type="text" class="form-control">
+           {% for error in form.user.errors %} <!-- any errors, notably the one for valid field being incomplete, will be shown underneath the relevant box -->
+      <span style="color: red;">[{{ error }}]</span>
+	{% endfor %}
+  </div>
+  <button type="submit" class="btn btn-outline-dark">Submit</button>
+</form></div>
+{% endblock %}

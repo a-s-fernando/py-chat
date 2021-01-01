@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% with messages = get_flashed_messages() %} <!-- lets the user know if creation was successful by flashing a short notification -->
+{% if messages %}
+  <ul>
+  {% for message in messages %}
+      <li>{{ message }} </li>
+  {% endfor %}
+  </ul>
+{% endif %}
+{% endwith %}
+<br>
+<center><h1> {{ title }} </h1></center>
+<br>
+{% if list %}
+<div class="container-md">
+{% for item in list %} <!-- loops through all of the valid messages in the database, and presents them using bootstraps card styling -->
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title"><a href="/requests/{{ item.id }}">{{ item.username }}</a></h5>
+  </div>
+</div>
+<button type="submit" class="btn btn-outline-dark"><a href="/requests/{{ item.id }}">Accept</a></button>
+<br>
+{% endfor %}
+</div>
+{% else %}
+<center><h1> No one wants to be friends right now...</h1>
+<img  src='https://www.pinclipart.com/picdir/big/143-1430624_sad-boys-logo-png-vector-royalty-free-sad.png' alt="sad" style='height:200px'></center>
+
+{% endif %}
+{% endblock %}

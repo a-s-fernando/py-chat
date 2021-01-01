@@ -1,41 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
-{% with messages = get_flashed_messages() %} <!-- lets the user know if creation was successful by flashing a short notification -->
-{% if messages %}
-  <ul>
-  {% for message in messages %}
-      <li>{{ message }} </li>
-  {% endfor %}
-  </ul>
-{% endif %}
-{% endwith %}
-<br>
-{% if login %}
-  <div class="alert alert-danger" role="alert">
-    This site uses cookies in order to give you a better user experience. By logging in, you agree to these cookies.
-  </div>
-{% endif %}
-<center><h1>{{ purpose }}</h1></center>
-<div class="container-md">
+
+<center><div class= w-50>
+  {% with messages = get_flashed_messages() %} <!-- lets the user know if creation was successful by flashing a short notification -->
+  {% if messages %}
+    <ul>
+    {% for message in messages %}
+        <li>{{ message }} </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+  {% endwith %}
+<h1>Hello {{ username }}</h1>
+<h2>Change your password here:</h2>
 <form action="" method="post" name="user">
     {{ form.hidden_tag() }}
   <div class="form-group">
-    <label for="exampleFormControlInput1">Username</label>
+    <label for="exampleFormControlInput1">New Password</label>
     <input name="username" type="text" class="form-control">
            {% for error in form.username.errors %} <!-- any errors, notably the one for valid field being incomplete, will be shown underneath the relevant box -->
       <span style="color: red;">[{{ error }}]</span>
 	{% endfor %}
   </div>
   <div class="form-group">
-    <label for="exampleFormControlInput1">Password</label>
+    <label for="exampleFormControlInput1">Confirm Password</label>
     <input name="password" type="text" class="form-control">
            {% for error in form.password.errors %} <!-- any errors, notably the one for valid field being incomplete, will be shown underneath the relevant box -->
       <span style="color: red;">[{{ error }}]</span>
   {% endfor %}
   </div>
   <button type="submit" class="btn btn-outline-dark">Submit</button>
-</form></div>
-{% if login %}
-  <center><h1> <a href="/register"> No Account? Click here to register! </a> </h1></center>
-{% endif %}
+</form></div></center>
+
 {% endblock %}

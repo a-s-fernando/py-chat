@@ -10,7 +10,4 @@ class messageForm(Form):
 	message = TextAreaField('message', validators=[DataRequired()])
 
 class requestForm(Form):
-	user = TextField('username', validators=[DataRequired()])
-
-class groupForm(Form):
-	name = TextField('groupname', validators=[DataRequired()])
+	user = TextField('name', validators=[DataRequired()])

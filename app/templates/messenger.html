@@ -1,33 +1,27 @@
-{% extends "task.html" %}
+{% extends "base.html" %}
 {% block content %}
-<br>
-<center><h1> {{ title }} </h1></center>
-<br>
-<div class="container-md">
+<script>
+});
+{% if group %}
+$(document).scrollTop( $(document).height() - $(window).height() );
+  $(document).ready(function() {
+    setInterval(function(){getgroup({{ id }})},3000);
+  });
+{% else %}
+  $(document).ready(function() {
+    setInterval(function(){getdm({{ id }})},3000);
+  });
+{% endif %}
+</script>
+
+<div id="messages" class="container-md">
 {% for message in messages %} <!-- loops through all of the valid messages in the database, and presents them using bootstraps card styling -->
 <div class="card">
-  <div class="card-header">
-    <h5 class="card-title">{{ message.username }}</h5>
-  </div>
   <div class="card-body">
-    <p class="card-text">{{ message.message }}</p>
+    <p class="card-text">{{ message.username }} : {{ message.message }}</p>
   </div>
 </div>
 <br>
 {% endfor %}
 </div>
-
-<div class="container-md">
-<form action="" method="post" name="user">
-    {{ form.hidden_tag() }}
-    <div class="form-group">
-       <label for="exampleFormControlTextarea1">Message</label>
-       <textarea name="message" class="form-control" rows="3"></textarea>
-            {% for error in form.message.errors %}
-         <span style="color: red;">[{{ error }}]</span>
-         {% endfor %}
-     </div>
-     <button type="submit" class="btn btn-outline-dark">Submit</button>
-</form></div>
-
 {% endblock %}
