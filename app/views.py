@@ -26,7 +26,7 @@ def home():
             flash('Password changed!')
             app.logger.info(current_user.username+' changed their password')
             return redirect('/login')
-        return render_template('home.html', title='WagWapp', username=current_user.username, form=form)
+        return render_template('home.html', title='py-Chat', username=current_user.username, form=form)
 
 
 @app.route('/friends', methods=['GET', 'POST'])
